@@ -2,13 +2,14 @@
 
 ## Scope completed locally
 
-The five assignment sections are implemented as Dawn sections: hero, shop grid, best-selling combos, bundles, and reviews rail. Their homepage order follows the assignment's listed scope.
+The five assignment sections are implemented as Dawn sections: hero, shop grid, best-selling combos, bundles, and reviews rail. Their homepage order follows the supplied prototype for the in-scope sections: hero, reviews, combos, bundles, then shop.
 
 ## Prototype adjustments made for production
 
 - Replaced prototype product artwork and prices with Shopify product media and variant prices.
 - Replaced repeated static cards with reusable Liquid and Theme Editor blocks.
 - Replaced global hero selectors with section-scoped JavaScript so Theme Editor reloads and duplicate instances do not conflict.
+- Replaced the prototype's duplicated, global stylesheet with a small stylesheet scoped to the five custom sections, so it cannot alter Dawn's header, footer, or product pages.
 - Respects `prefers-reduced-motion`; the reviews marquee pauses on hover or keyboard focus.
 - Provides product image fallback, sold-out state, semantic headings, visible keyboard focus, and responsive grid/rails.
 - Uses an actual Shopify bundle product as the combo/bundle price and cart source. A theme alone cannot safely apply the prototype's fixed bundle discounts to arbitrary individual products at checkout.
