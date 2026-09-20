@@ -1,0 +1,42 @@
+{%- liquid
+  assign product_form_id = 'purelane-product-form-' | append: section.id | append: '-' | append: product.id
+  assign product_image_alt = product.featured_image.alt | default: product.title
+  assign rating = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value
+-%}
+
+<article class="glass card rv product-card" role="listitem">
+  <div class="shot">
+    {% if product.available == false %}
+      <span class="pill">{{ 'products.product.sold_out' | t }}</span>
+    {% elsif product.tags contains 'new' %}
+      <span class="pill">New</span>
+    {% endif %}
+    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 600 | image_tag: class: 'product-card-image', loading: 'lazy', widths: '165, 360, 533, 600', alt: product_image_alt }}
+      {% else %}
+        <div class="product-image-placeholder" role="img" aria-label="{{ product.title | escape }}">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+    </a>
+  </div>
+  <h3 class="product-title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+  {% if rating != blank %}
+    <div class="rate"><b aria-label="{{ rating }} out of 5 stars">★ {{ rating }}</b>{% if rating_count != blank %} · {{ rating_count }} reviews{% endif %}</div>
+  {% endif %}
+  <div class="pr">
+    <strong>{{ product.price | money }}</strong>
+    {% if product.compare_at_price > product.price %}
+      <s>{{ product.compare_at_price | money }}</s>
+      <em>{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% off</em>
+    {% endif %}
+  </div>
+  {% form 'product', product, id: product_form_id, class: 'product-form' %}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" class="btn btn-ghost btn-sm{% unless product.available %} sold-out{% endunless %}" {% unless product.available %}disabled{% endunless %}>
+      {% if product.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}
+    </button>
+  {% endform %}
+</article>

@@ -9,7 +9,11 @@
       },
       "block_order": ["hero_product_1", "hero_product_2", "hero_product_3"],
       "settings": {}
+    },
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": {}
     }
   },
-  "order": ["purelane_hero"]
+  "order": ["purelane_hero", "purelane_shop"]
 }
