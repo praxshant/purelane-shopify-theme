@@ -13,7 +13,17 @@
     "purelane_shop": {
       "type": "purelane-shop",
       "settings": {}
+    },
+    "purelane_combos": {
+      "type": "purelane-combos",
+      "blocks": {
+        "combo_1": { "type": "combo" },
+        "combo_2": { "type": "combo" },
+        "combo_3": { "type": "combo" }
+      },
+      "block_order": ["combo_1", "combo_2", "combo_3"],
+      "settings": {}
     }
   },
-  "order": ["purelane_hero", "purelane_shop"]
+  "order": ["purelane_hero", "purelane_shop", "purelane_combos"]
 }
