@@ -3,30 +3,15 @@
     <div class="panel-head rv"><span class="kicker">{{ section.settings.kicker | escape }}</span><h2 class="d2" style="margin-top:12px">{{ section.settings.heading | escape }}</h2><div class="rule" aria-hidden="true"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg><i></i></div><p class="lede" style="margin:14px auto 0">{{ section.settings.subheading | escape }}</p></div>
     <div class="comborail rv" role="list">
       {% for block in section.blocks %}
-        {%- liquid
-          assign total_price = 0
-          assign total_compare_at_price = 0
-          assign has_unavailable_product = false
-          for product in block.settings.products
-            assign variant = product.selected_or_first_available_variant
-            assign total_price = total_price | plus: variant.price
-            if variant.compare_at_price > variant.price
-              assign total_compare_at_price = total_compare_at_price | plus: variant.compare_at_price
-            else
-              assign total_compare_at_price = total_compare_at_price | plus: variant.price
-            endif
-            unless product.available
-              assign has_unavailable_product = true
-            endunless
-          endfor
-          assign saving = total_compare_at_price | minus: total_price
-        -%}
+        {%- assign bundle_product = block.settings.bundle_product -%}
+        {%- assign bundle_variant = bundle_product.selected_or_first_available_variant -%}
+        {%- assign saving = bundle_variant.compare_at_price | minus: bundle_variant.price -%}
         <article class="glass combo{% if block.settings.featured %} hero-combo{% endif %}" role="listitem" {{ block.shopify_attributes }}>
           <div class="tray"><span class="save">{% if saving > 0 %}You save {{ saving | money }}{% else %}{{ block.settings.top_label | escape }}{% endif %}</span>{% if block.settings.badge != blank %}<span class="flag">{{ block.settings.badge | escape }}</span>{% endif %}<div class="stack">
             {% for product in block.settings.products limit: 5 %}<span class="it">{% if product.featured_image %}{{ product.featured_image | image_url: width: 220 | image_tag: class: 'shop-pimg', loading: 'lazy', alt: product.title }}{% else %}<span class="tile">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</span>{% endif %}<span>{{ product.title | truncate: 28 | escape }}</span></span>{% unless forloop.last %}<span class="plus" aria-hidden="true">+</span>{% endunless %}{% endfor %}
           </div></div>
-          <div class="body"><h3>{{ block.settings.title | escape }}</h3><div class="cnt">{{ block.settings.products.count }} products</div><p class="inc">{{ block.settings.description | escape }}</p><div class="prow"><strong>{{ total_price | money }}</strong>{% if total_compare_at_price > total_price %}<s>{{ total_compare_at_price | money }}</s><em>Save {{ saving | money }}</em>{% endif %}</div><div class="fine">{{ block.settings.fine_print | escape }}</div>
-            <form method="post" action="{{ routes.cart_add_url }}">{% for product in block.settings.products %}<input type="hidden" name="items[][id]" value="{{ product.selected_or_first_available_variant.id }}">{% endfor %}<input type="hidden" name="attributes[purelane_combo]" value="{{ block.settings.title | escape }}"><button type="submit" class="btn {% if block.settings.featured %}btn-primary{% else %}btn-ghost{% endif %}" {% if block.settings.products == blank or has_unavailable_product %}disabled{% endif %}>{% if has_unavailable_product %}Unavailable{% else %}{{ block.settings.button_label | escape }}{% endif %} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></button></form>
+          <div class="body"><h3>{{ block.settings.title | escape }}</h3><div class="cnt">{{ block.settings.products.size }} products</div><p class="inc">{{ block.settings.description | escape }}</p><div class="prow">{% if bundle_product != blank %}<strong>{{ bundle_variant.price | money }}</strong>{% if bundle_variant.compare_at_price > bundle_variant.price %}<s>{{ bundle_variant.compare_at_price | money }}</s><em>Save {{ saving | money }}</em>{% endif %}{% endif %}</div><div class="fine">{{ block.settings.fine_print | escape }}</div>
+            {% if bundle_product != blank %}{% form 'product', bundle_product, class: 'purelane-bundle-form' %}<input type="hidden" name="id" value="{{ bundle_variant.id }}"><button type="submit" class="btn {% if block.settings.featured %}btn-primary{% else %}btn-ghost{% endif %}" {% if bundle_product.available == false %}disabled{% endif %}>{% if bundle_product.available == false %}Unavailable{% else %}{{ block.settings.button_label | escape }}{% endif %} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></button>{% endform %}{% else %}<button type="button" class="btn btn-ghost" disabled>Select a bundle product</button>{% endif %}
           </div>
         </article>
       {% endfor %}
@@ -35,5 +20,5 @@
 </section>
 
 {% schema %}
-{"name":"Purelane combos","tag":"section","class":"purelane-combos-section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Pre-built to save you money"},{"type":"text","id":"heading","label":"Heading","default":"Best selling combos"},{"type":"textarea","id":"subheading","label":"Subheading","default":"Swipe through the boxes people order most. Each one is already priced below buying the same products on their own."}],"blocks":[{"type":"combo","name":"Combo","settings":[{"type":"text","id":"title","label":"Title","default":"Kitchen essentials"},{"type":"product_list","id":"products","label":"Products","limit":5},{"type":"textarea","id":"description","label":"Description","default":"A ready-made combination for the room you use most."},{"type":"text","id":"top_label","label":"Top label when no product discount exists","default":"Ready-made set"},{"type":"text","id":"badge","label":"Badge"},{"type":"text","id":"fine_print","label":"Fine print","default":"Inclusive of all taxes · COD available"},{"type":"text","id":"button_label","label":"Button label","default":"Add combo to cart"},{"type":"checkbox","id":"featured","label":"Featured","default":false}]}],"presets":[{"name":"Purelane combos","blocks":[{"type":"combo","settings":{"title":"Kitchen essentials","featured":true}},{"type":"combo","settings":{"title":"Laundry care bundle"}},{"type":"combo","settings":{"title":"Bathroom deep clean"}}]}]}
+{"name":"Purelane combos","tag":"section","class":"purelane-combos-section","settings":[{"type":"text","id":"kicker","label":"Kicker","default":"Pre-built to save you money"},{"type":"text","id":"heading","label":"Heading","default":"Best selling combos"},{"type":"textarea","id":"subheading","label":"Subheading","default":"Swipe through the boxes people order most. Each one is already priced below buying the same products on their own."}],"blocks":[{"type":"combo","name":"Combo","settings":[{"type":"text","id":"title","label":"Title","default":"Kitchen essentials"},{"type":"product","id":"bundle_product","label":"Bundle product","info":"Select the real Shopify bundle product. Its price, compare-at price, availability, and cart item are used by this card."},{"type":"product_list","id":"products","label":"Included products","limit":5},{"type":"textarea","id":"description","label":"Description","default":"A ready-made combination for the room you use most."},{"type":"text","id":"top_label","label":"Top label when no bundle discount exists","default":"Ready-made set"},{"type":"text","id":"badge","label":"Badge"},{"type":"text","id":"fine_print","label":"Fine print","default":"Inclusive of all taxes · COD available"},{"type":"text","id":"button_label","label":"Button label","default":"Add combo to cart"},{"type":"checkbox","id":"featured","label":"Featured","default":false}]}],"presets":[{"name":"Purelane combos","blocks":[{"type":"combo","settings":{"title":"Kitchen essentials","featured":true}},{"type":"combo","settings":{"title":"Laundry care bundle"}},{"type":"combo","settings":{"title":"Bathroom deep clean"}}]}]}
 {% endschema %}
