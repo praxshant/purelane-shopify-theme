@@ -33,7 +33,19 @@
       },
       "block_order": ["bundle_1", "bundle_2", "bundle_3"],
       "settings": {}
+    },
+    "purelane_reviews": {
+      "type": "purelane-reviews",
+      "blocks": {
+        "review_1": { "type": "review" },
+        "review_2": { "type": "review" },
+        "review_3": { "type": "review" },
+        "review_4": { "type": "review" },
+        "review_5": { "type": "review" }
+      },
+      "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5"],
+      "settings": {}
     }
   },
-  "order": ["purelane_hero", "purelane_shop", "purelane_combos", "purelane_bundles"]
+  "order": ["purelane_hero", "purelane_shop", "purelane_combos", "purelane_bundles", "purelane_reviews"]
 }
