@@ -23,7 +23,17 @@
       },
       "block_order": ["combo_1", "combo_2", "combo_3"],
       "settings": {}
+    },
+    "purelane_bundles": {
+      "type": "purelane-bundles",
+      "blocks": {
+        "bundle_1": { "type": "bundle" },
+        "bundle_2": { "type": "bundle" },
+        "bundle_3": { "type": "bundle" }
+      },
+      "block_order": ["bundle_1", "bundle_2", "bundle_3"],
+      "settings": {}
     }
   },
-  "order": ["purelane_hero", "purelane_shop", "purelane_combos"]
+  "order": ["purelane_hero", "purelane_shop", "purelane_combos", "purelane_bundles"]
 }
