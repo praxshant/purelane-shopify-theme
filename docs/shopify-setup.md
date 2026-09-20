@@ -41,4 +41,3 @@ This avoids the incorrect alternative of adding individual products at their nor
 3. Select three real bundle products and their contents for Bundles.
 4. Select up to three hero products.
 5. Add, remove, reorder, and edit review blocks as required.
-

@@ -20,4 +20,3 @@ The development-store URL/password, product seed data, actual bundle-product con
 ## AI workflow
 
 AI assisted with turning the prototype patterns into Liquid sections and with repetitive schema and card scaffolding. Human review was used to keep Shopify products, variant pricing, availability, cart behavior, accessibility, and Theme Editor isolation as the source of truth. For repeat client work, product/bundle data contracts and cross-viewport screenshot checks should be systematised before section implementation begins.
-
