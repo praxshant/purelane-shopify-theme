@@ -23,8 +23,8 @@ Create these optional product metafields if rating text is required on product c
 
 | Namespace and key | Type |
 | --- | --- |
-| `reviews.rating` | Rating |
-| `reviews.rating_count` | Number (integer) |
+| `custom.rating` | Rating |
+| `custom.rating_count` | Integer |
 
 Leave ratings empty for products without verified review data. The card intentionally omits the rating row instead of inventing a value.
 

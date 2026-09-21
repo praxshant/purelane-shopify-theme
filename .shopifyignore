@@ -1,0 +1,6 @@
+purelane-homepage.html
+purelane-theme-clean.zip
+*.zip
+docs/*
+release-notes.md
+zc.py
