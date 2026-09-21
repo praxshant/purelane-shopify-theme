@@ -1,8 +1,8 @@
 {%- liquid
   assign product_form_id = 'purelane-product-form-' | append: section.id | append: '-' | append: product.id
   assign product_image_alt = product.featured_image.alt | default: product.title
-  assign rating = product.metafields.reviews.rating.value.rating
-  assign rating_count = product.metafields.reviews.rating_count.value
+  assign rating = product.metafields.custom.rating.value.rating
+  assign rating_count = product.metafields.custom.rating_count.value
 -%}
 
 <article class="glass card rv product-card" role="listitem">

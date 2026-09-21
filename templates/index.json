@@ -3,23 +3,31 @@
     "purelane_hero": {
       "type": "purelane-hero",
       "blocks": {
-        "hero_product_1": { "type": "slide" },
-        "hero_product_2": { "type": "slide" },
-        "hero_product_3": { "type": "slide" }
+        "hero_product_1": { "type": "slide", "settings": { "product": "foaming-kitchen-cleaner", "label": "Single bottle" } },
+        "hero_product_2": { "type": "slide", "settings": { "product": "laundry-detergent", "label": "Family size" } },
+        "hero_product_3": { "type": "slide", "settings": { "product": "herbal-floor-cleaner", "label": "Refill pack" } }
       },
       "block_order": ["hero_product_1", "hero_product_2", "hero_product_3"],
       "settings": {}
     },
-    "purelane_shop": {
-      "type": "purelane-shop",
+    "purelane_reviews": {
+      "type": "purelane-reviews",
+      "blocks": {
+        "review_1": { "type": "review", "settings": { "title": "Works like a charm", "quote": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.", "name": "Anita", "product": "Laundry detergent" } },
+        "review_2": { "type": "review", "settings": { "title": "Best dishwash ever", "quote": "Cuts grease in one go and rinses off clean. A little goes a long way, so the bottle lasts.", "name": "Priya", "product": "Dishwash gel" } },
+        "review_3": { "type": "review", "settings": { "title": "Great product, great packaging", "quote": "Arrived quickly, no leaks, and the packaging is fully recyclable. Will reorder.", "name": "Sunita", "product": "Kitchen cleaner" } },
+        "review_4": { "type": "review", "settings": { "title": "Dog friendly", "quote": "Safe around our pets and no harsh smell on the floors. Exactly what we needed.", "name": "Rohit S.", "product": "Floor cleaner" } },
+        "review_5": { "type": "review", "settings": { "title": "Sparkling taps again", "quote": "Removed years of limescale from the bathroom taps without scrubbing. Impressed.", "name": "Verified buyer", "product": "Tap cleaner" } }
+      },
+      "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5"],
       "settings": {}
     },
     "purelane_combos": {
       "type": "purelane-combos",
       "blocks": {
-        "combo_1": { "type": "combo" },
-        "combo_2": { "type": "combo" },
-        "combo_3": { "type": "combo" }
+        "combo_1": { "type": "combo", "settings": { "title": "Kitchen essentials", "bundle_product": "foaming-kitchen-cleaner", "products": ["foaming-kitchen-cleaner", "dishwash-gel", "tap-limescale-remover"], "featured": true } },
+        "combo_2": { "type": "combo", "settings": { "title": "Laundry care bundle", "bundle_product": "laundry-detergent", "products": ["laundry-detergent", "herbal-floor-cleaner"] } },
+        "combo_3": { "type": "combo", "settings": { "title": "Bathroom deep clean", "bundle_product": "toilet-cleaner", "products": ["toilet-cleaner", "tap-limescale-remover", "magic-eraser"] } }
       },
       "block_order": ["combo_1", "combo_2", "combo_3"],
       "settings": {}
@@ -27,24 +35,16 @@
     "purelane_bundles": {
       "type": "purelane-bundles",
       "blocks": {
-        "bundle_1": { "type": "bundle" },
-        "bundle_2": { "type": "bundle" },
-        "bundle_3": { "type": "bundle" }
+        "bundle_1": { "type": "bundle", "settings": { "tag": "Starter", "bundle_product": "dishwash-gel", "products": ["dishwash-gel", "foaming-kitchen-cleaner"] } },
+        "bundle_2": { "type": "bundle", "settings": { "tag": "Most popular", "bundle_product": "laundry-detergent", "products": ["laundry-detergent", "herbal-floor-cleaner", "toilet-cleaner"], "featured": true } },
+        "bundle_3": { "type": "bundle", "settings": { "tag": "Whole home", "bundle_product": "foaming-kitchen-cleaner", "products": ["foaming-kitchen-cleaner", "dishwash-gel", "herbal-floor-cleaner", "toilet-cleaner", "tap-limescale-remover"] } }
       },
       "block_order": ["bundle_1", "bundle_2", "bundle_3"],
       "settings": {}
     },
-    "purelane_reviews": {
-      "type": "purelane-reviews",
-      "blocks": {
-        "review_1": { "type": "review" },
-        "review_2": { "type": "review" },
-        "review_3": { "type": "review" },
-        "review_4": { "type": "review" },
-        "review_5": { "type": "review" }
-      },
-      "block_order": ["review_1", "review_2", "review_3", "review_4", "review_5"],
-      "settings": {}
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": { "collection": "purelane", "products_to_show": 8 }
     }
   },
   "order": ["purelane_hero", "purelane_reviews", "purelane_combos", "purelane_bundles", "purelane_shop"]

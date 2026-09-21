@@ -10,3 +10,9 @@ Thumbs.db
 .shopify
 node_modules
 *.zip
+
+# Secrets / local env #
+#######################
+.env
+.env.*
+*.log
