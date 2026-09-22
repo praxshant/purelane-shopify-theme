@@ -28,16 +28,16 @@ Create these optional product metafields if rating text is required on product c
 
 Leave ratings empty for products without verified review data. The card intentionally omits the rating row instead of inventing a value.
 
-## Combo and bundle products
+## Combo and bundle cards
 
-The price shown on every combo or bundle card is the selected **Bundle product**'s Shopify variant price and compare-at price. Configure these products with Shopify Bundles (or the store's approved bundle solution) before selecting them in the Theme Editor. Select their constituent products separately in the card's **Included products** setting so the visual stack remains merchant-editable.
+The combos and bundles are marketing displays that mirror the prototype. Each card's **offer price, compare-at price and saving** are merchant-editable section settings (set to the prototype's values), and the **Included products** setting drives the product-image stack. Their CTAs are the prototype's on-page navigation ("Shop bundle" → `#bundles`, "Build this box" → `#shop`), not add-to-cart — only the shop grid sells, via native product forms.
 
-This avoids the incorrect alternative of adding individual products at their normal prices while presenting a fictional bundle discount. The bundle product, availability, and cart line remain Shopify's source of truth.
+There is no native Shopify field for a combo/bundle offer price, so editable settings are the pragmatic solution. To turn these into true multi-product purchases with a combined cart line, model them as a `bundle_offer` metaobject or Shopify Bundles store-side and bind the card price to that — no other theme change needed.
 
 ## Theme Editor
 
 1. Select the shop collection and choose eight products.
-2. Select three real bundle products and their contents for Combos.
-3. Select three real bundle products and their contents for Bundles.
+2. In Combos, set each card's price / compare-at / saving and pick its included products.
+3. In Bundles, set each tier's price / compare-at and pick its included products.
 4. Select up to three hero products.
 5. Add, remove, reorder, and edit review blocks as required.

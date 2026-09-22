@@ -12,11 +12,17 @@ The five assignment sections are implemented as Dawn sections: hero, shop grid, 
 - Replaced the prototype's duplicated, global stylesheet with a small stylesheet scoped to the five custom sections, so it cannot alter Dawn's header, footer, or product pages.
 - Respects `prefers-reduced-motion`; the reviews marquee pauses on hover or keyboard focus.
 - Provides product image fallback, sold-out state, semantic headings, visible keyboard focus, and responsive grid/rails.
-- Uses an actual Shopify bundle product as the combo/bundle price and cart source. A theme alone cannot safely apply the prototype's fixed bundle discounts to arbitrary individual products at checkout.
+- Reproduces the prototype's combos/bundles as marketing displays with its on-page navigation CTAs ("Shop bundle" → `#bundles`, "Build this box" → `#shop`), not add-to-cart. Their offer prices have no native single-product field, so they are merchant-editable section settings set to the prototype's exact values; only the shop grid sells, via native product forms.
 
-## Still required for delivery
+## Deliberately out of scope
 
-The development-store URL/password, product seed data, actual bundle-product configuration, storefront visual comparison from 375px upward, real cart/checkout testing, and deployment cannot be verified from this local workspace. Complete those in the store before sending the assignment.
+The prototype has sections beyond the assignment's five (ingredients, how-it-works, proof, why-bundles, categories, footer promos). Those were left out rather than half-built, and the two extra combo cards in the prototype (Complete Home, Hard Water Kit) were not wired since their constituent products aren't in the eight-product seed set.
+
+## With more time
+
+- Model combos/bundles as a `bundle_offer` **metaobject** (or Shopify Bundles) so the offer price and a true multi-product cart line stay platform-owned, rather than editable section settings.
+- Run a Lighthouse/Core Web Vitals pass against the preview and act on anything it flags.
+- Seed the remaining combo constituent products (fabric conditioner, machine cleaner) so combo contents match the prototype one-to-one.
 
 ## AI workflow
 

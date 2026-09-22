@@ -18,8 +18,8 @@ Homepage order follows the prototype: hero → reviews → combos → bundles �
 |---|---------|------|-------------|
 | 1 | Hero | [sections/purelane-hero.liquid](sections/purelane-hero.liquid) | Product blocks (image, variant price/compare-at) |
 | 2 | Reviews rail | [sections/purelane-reviews.liquid](sections/purelane-reviews.liquid) | Editable review blocks + aggregate settings |
-| 3 | Best-selling combos | [sections/purelane-combos.liquid](sections/purelane-combos.liquid) | Bundle product + included-product list |
-| 4 | Build-your-bundle | [sections/purelane-bundles.liquid](sections/purelane-bundles.liquid) | Bundle product + included-product list |
+| 3 | Best-selling combos | [sections/purelane-combos.liquid](sections/purelane-combos.liquid) | Editable offer price/compare-at + product image stack |
+| 4 | Build-your-bundle | [sections/purelane-bundles.liquid](sections/purelane-bundles.liquid) | Editable offer price/compare-at + product image stack |
 | 5 | Shop / product grid | [sections/purelane-shop.liquid](sections/purelane-shop.liquid) | Selected collection |
 
 Reusable card: [snippets/purelane-product-card.liquid](snippets/purelane-product-card.liquid) (shared by the shop grid; the combos/bundles reuse the same visual language). Scoped styling in [assets/purelane.css](assets/purelane.css), scoped behavior in [assets/purelane.js](assets/purelane.js).
@@ -42,7 +42,9 @@ Reusable card: [snippets/purelane-product-card.liquid](snippets/purelane-product
 
 ## Architectural note (be transparent)
 
-The combo and bundle cards use a **Shopify product stand-in** for their purchasable CTA — the selected `bundle_product`'s price, availability and cart line — rather than a true multi-item Shopify **Bundle** product. This keeps price and cart as Shopify's source of truth instead of faking a discount on individual line items. Swapping in real Bundle products (Shopify Bundles or an approved bundle app) is a store-side change with no theme edits. Documented in [docs/shopify-setup.md](docs/shopify-setup.md).
+The combos and bundles reproduce the prototype exactly. In the prototype these cards are **marketing displays**, not purchase widgets: their CTAs are on-page navigation ("Shop bundle" → `#bundles`, "Build this box" → `#shop`), so the theme keeps that behaviour rather than inventing an add-to-cart. Only the shop grid sells, via native Shopify product forms.
+
+A combo/bundle offer price has **no native single-product field**, so it's exposed as a merchant-editable section setting (price, compare-at, saving) set to the prototype's values — editable in the Theme Editor without touching Liquid. A true multi-product Shopify **Bundle** (one cart line spanning several products) is a store-side addition; with more time I'd model these as a `bundle_offer` metaobject or Shopify Bundles so the offer price and cart stay platform-owned. Documented in [docs/shopify-setup.md](docs/shopify-setup.md).
 
 ## Docs
 
