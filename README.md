@@ -4,11 +4,11 @@ Converted the supplied `purelane-homepage.html` prototype into a Shopify-native 
 
 ## Live review
 
-- **Dev store:** `https://purelane-theme-test-piibskhz.myshopify.com` (password-protected)
-- **Unpublished theme preview:** `https://purelane-theme-test-piibskhz.myshopify.com?preview_theme_id=167033929879`
+- **Dev store:** `https://purelane-theme-test-piibskhz.myshopify.com` (password-protected — the Purelane Homepage theme is published, so this lands on the build directly)
+- **Theme preview (backup):** `https://purelane-theme-test-piibskhz.myshopify.com?preview_theme_id=167033929879`
 - Storefront password and admin access are provided in the submission email, not committed here.
 
-The theme is intentionally left **unpublished**; the store's default Shopify test data was left untouched.
+The dev store is seeded with the eight Purelane products used by the theme and QA flows.
 
 ## Five implemented sections
 
